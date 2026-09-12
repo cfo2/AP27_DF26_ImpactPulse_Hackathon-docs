@@ -1,0 +1,183 @@
+{
+  "description": "Ready-to-paste JSON templates for the official Slack Block Kit Builder (https://app.slack.com/block-kit-builder)",
+  "templates": {
+    "1_project_risk_alert": {
+      "blocks": [
+        {
+          "type": "header",
+          "text": {
+            "type": "plain_text",
+            "text": "🚨 ImpactPulse Operational Risk Alert",
+            "emoji": true
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*High-risk Program:* *Salesforce Career Foundations*\n*Status:* High Risk — Immediate Capacity Bottleneck"
+          }
+        },
+        {
+          "type": "section",
+          "fields": [
+            {
+              "type": "mrkdwn",
+              "text": "*Completion Rate:*\n42% _(Benchmark Target: 65%)_"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Stalled Learners:*\n18 learners _(>14 days in Module 2)_"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Mentor Ratio:*\n2 mentors for 18 learners _(Severe gap)_"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Employer Deadline:*\nSpring Hiring Cohort in 21 days"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "💡 *Recommended Next Action (Grounded Decision Support):*\nEscalate immediately to *Sam (Executive Director)* and dispatch coordination notice to *Anu (Director Coordinator)*. Reassign 3 volunteer mentors from Digital Workplace and generate a high-priority Salesforce Task."
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "⚡ Escalate Risk (Create Task)",
+                "emoji": true
+              },
+              "style": "danger",
+              "value": "risk_001",
+              "action_id": "action_escalate_risk"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "📊 Open Dashboard",
+                "emoji": true
+              },
+              "url": "https://ap-27-df-26-impact-pulse-hack02.vercel.app/internal/executive",
+              "action_id": "action_open_dashboard"
+            }
+          ]
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "🔍 *Data Provenance:* Salesforce Tasks & Cohort Tracking | *Confidence:* High | *Timestamp:* Just now"
+            }
+          ]
+        }
+      ]
+    },
+    "2_escalation_executed_confirmation": {
+      "blocks": [
+        {
+          "type": "header",
+          "text": {
+            "type": "plain_text",
+            "text": "✅ Risk Escalation Successfully Executed & Logged",
+            "emoji": true
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Action Approved by:* @Elena Rostova (Executive Director)\n*Timestamp:* 10:45 AM EST\n*ImpactPulse ID:* `ESC-2025-SF-01`\n\n*Actions Completed:*\n1. 📋 *Created High-Priority Salesforce Task:* Assigned to *Sam (Executive Director)*: _\"Urgent: Reallocate 3 mentors for Salesforce Career Foundations cohort\"_\n2. 📨 *Dispatched Coordination Notice:* Sent to *Anu (Director Coordinator)* for immediate mentor scheduling\n3. 🔒 *Audit Trail:* Risk updated and escalation logged in Salesforce\n4. 📊 *Status:* Updated in Salesforce & Executive Command Center."
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "🔒 *Responsible AI Gate:* Action executed only following authorized human verification."
+            }
+          ]
+        }
+      ]
+    },
+    "3_executive_board_brief": {
+      "blocks": [
+        {
+          "type": "header",
+          "text": {
+            "type": "plain_text",
+            "text": "📋 ImpactPulse Executive Governance Brief (Q1 2025)",
+            "emoji": true
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Executive Summary:*\nCommunity Forward Alliance has reached *1,240 learners served* (83% of annual goal) with *68% progression* across 5 pathways. Fundraising is at *$360,000* toward the $500,000 quarterly goal with *$115,000* in late-stage pipeline."
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "⚠️ *Identified Risks:*\n• Flagship Salesforce Career Foundations is stalled at 42% completion (target 65%).\n• Technical mentor bottleneck (2 mentors vs 18 needed).\n• Two late-stage grant opportunities lack assigned next activities in Salesforce."
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "✅ *Decisions Needed:*\n1. Reassign 3 mentors from Digital Workplace to Salesforce Foundations.\n2. Create high-priority stewardship tasks for pending pipeline gifts."
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "✅ Request Board Review & Log Approval",
+                "emoji": true
+              },
+              "style": "primary",
+              "value": "brief_001",
+              "action_id": "action_approve_brief"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "🏛️ View Command Center",
+                "emoji": true
+              },
+              "url": "https://ap-27-df-26-impact-pulse-hack02.vercel.app/internal/executive",
+              "action_id": "action_view_brief_web"
+            }
+          ]
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "🤖 *Responsible AI Disclosure:* Summary synthesizes verified Salesforce CRM & program metrics. Approval is logged to Salesforce audit trail."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImpactPulse — Slack Command Center Interactive Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body class="bg-[#1a1d21] text-gray-200 min-h-screen p-6 flex flex-col items-center">
+  <div class="max-w-3xl w-full">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-800">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white text-xl">#</div>
+        <div>
+          <h1 class="text-xl font-bold text-white">#executive-watchtower</h1>
+          <p class="text-xs text-gray-400">ImpactPulse Nonprofit Leadership Copilot Demo</p>
+        </div>
+      </div>
+      <span class="bg-emerald-900/60 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-700 font-medium">
+        ● Live Simulator Active
+      </span>
+    </div>
+
+    <!-- Instructions / Control Toolbar -->
+    <div class="bg-[#222529] p-4 rounded-xl mb-6 border border-gray-700">
+      <div class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Simulate Slash Commands (Click to run):</div>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="runCommand('/project-risk')" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 font-mono text-xs px-3 py-1.5 rounded-lg border border-gray-600 transition">/project-risk</button>
+        <button onclick="runCommand('/board-brief')" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 font-mono text-xs px-3 py-1.5 rounded-lg border border-gray-600 transition">/board-brief</button>
+        <button onclick="runCommand('/decision-queue')" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 font-mono text-xs px-3 py-1.5 rounded-lg border border-gray-600 transition">/decision-queue</button>
+        <button onclick="runCommand('/impact-help')" class="bg-gray-800 hover:bg-gray-700 text-indigo-300 font-mono text-xs px-3 py-1.5 rounded-lg border border-gray-600 transition">/impact-help</button>
+        <button onclick="resetDemo()" class="bg-red-950/40 hover:bg-red-900/50 text-red-300 font-sans text-xs px-3 py-1.5 rounded-lg border border-red-800/60 ml-auto transition">Reset Chat</button>
+      </div>
+    </div>
+
+    <!-- Message Stream -->
+    <div id="chat-stream" class="space-y-6">
+      <!-- Default Initial Prompt -->
+      <div class="flex items-start space-x-3 text-sm">
+        <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+        <div class="flex-1 bg-[#222529] p-4 rounded-xl border border-gray-700 shadow-sm">
+          <div class="flex items-center space-x-2 mb-1">
+            <span class="font-bold text-white">ImpactPulse Bot</span>
+            <span class="text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">APP</span>
+            <span class="text-xs text-gray-400">Just now</span>
+          </div>
+          <div class="text-gray-300">
+            Welcome to the <strong>ImpactPulse Executive Command Center</strong>. Select a command above to test live governance decision support.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Audit Telemetry Log -->
+    <div class="mt-8 bg-black/40 p-4 rounded-xl border border-gray-800 text-xs font-mono">
+      <div class="flex items-center justify-between text-gray-400 mb-2">
+        <span class="font-bold text-gray-300">📡 Backend Telemetry & Audit Stream:</span>
+        <span id="sf-mode" class="text-emerald-400">Mode: Salesforce Mock Client + Supabase</span>
+      </div>
+      <div id="telemetry-log" class="text-gray-400 space-y-1">
+        <div>[READY] Waiting for slash command or interactive button event...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function logTelemetry(msg) {
+      const log = document.getElementById('telemetry-log');
+      const time = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      div.innerHTML = `<span class="text-gray-600">[${time}]</span> ${msg}`;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function runCommand(cmd) {
+      const stream = document.getElementById('chat-stream');
+      logTelemetry(`Slash command invoked: <span class="text-indigo-400">${cmd}</span>`);
+
+      if (cmd === '/project-risk' || cmd === '/escalate-risk') {
+        stream.innerHTML += `
+          <div id="risk-card" class="flex items-start space-x-3 text-sm">
+            <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+            <div class="flex-1 bg-[#222529] p-4 rounded-xl border-l-4 border-l-red-500 border-gray-700 shadow-sm">
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="font-bold text-white">ImpactPulse Bot</span>
+                <span class="text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">APP</span>
+                <span class="text-xs text-gray-400">Just now</span>
+              </div>
+              <div class="text-base font-bold text-red-400 mb-2">🚨 ImpactPulse Operational Risk Alert</div>
+              <div class="text-gray-200 mb-3"><strong>High-risk Program:</strong> Salesforce Career Foundations<br><span class="text-red-300 text-xs">Status: High Risk — Immediate Capacity Bottleneck</span></div>
+              
+              <div class="grid grid-cols-2 gap-2 bg-[#1a1d21] p-3 rounded-lg border border-gray-800 text-xs mb-3">
+                <div><span class="text-gray-400">Completion Rate:</span><br><strong class="text-yellow-400">42%</strong> (Target: 65%)</div>
+                <div><span class="text-gray-400">Stalled Learners:</span><br><strong class="text-red-400">18 learners</strong> (>14 days in Mod 2)</div>
+                <div><span class="text-gray-400">Mentor Ratio:</span><br><strong class="text-red-400">2 mentors : 18 learners</strong></div>
+                <div><span class="text-gray-400">Employer Deadline:</span><br><strong class="text-gray-200">Spring Cohort (21 days)</strong></div>
+              </div>
+
+              <div class="text-xs text-indigo-300 mb-4 bg-indigo-950/30 p-2.5 rounded border border-indigo-900/50">
+                💡 <strong>Recommended Next Action:</strong> Escalate immediately to <strong>Sam (Executive Director)</strong> and dispatch coordination notice to <strong>Anu (Director Coordinator)</strong>. Reassign 3 volunteer mentors and create a high-priority Salesforce Task.
+              </div>
+
+              <div class="flex gap-3 mb-3">
+                <button onclick="approveEscalation()" class="bg-red-600 hover:bg-red-500 text-white font-medium text-xs px-4 py-2 rounded-lg transition shadow">⚡ Escalate Risk (Create Task)</button>
+                <a href="../app/internal/executive/page.tsx" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs px-3 py-2 rounded-lg transition">📊 Open Dashboard</a>
+              </div>
+
+              <div class="text-[11px] text-gray-400 border-t border-gray-800 pt-2">
+                🔍 Data Provenance: Salesforce Standard Tasks & Cohort Pacing | Confidence: High
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (cmd === '/board-brief') {
+        stream.innerHTML += `
+          <div class="flex items-start space-x-3 text-sm">
+            <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+            <div class="flex-1 bg-[#222529] p-4 rounded-xl border-l-4 border-l-blue-500 border-gray-700 shadow-sm">
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="font-bold text-white">ImpactPulse Bot</span>
+                <span class="text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">APP</span>
+              </div>
+              <div class="text-base font-bold text-blue-400 mb-2">📋 ImpactPulse Executive Governance Brief (Q1 2025)</div>
+              <p class="text-gray-300 text-xs mb-3">Community Forward Alliance has reached <strong>1,240 learners served</strong> (83% of annual goal). Fundraising is at <strong>$360,000</strong> toward the $500,000 quarterly goal with $115,000 in late-stage pipeline.</p>
+              <div class="text-xs bg-gray-900/60 p-2.5 rounded border border-gray-800 mb-3 text-yellow-300">
+                ⚠️ <strong>Key Risk:</strong> Flagship Salesforce Foundations stalled at 42% completion due to mentor bottleneck.
+              </div>
+              <div class="flex gap-3">
+                <button onclick="alert('✅ Board Brief Approved and logged to Salesforce Task!')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-4 py-2 rounded-lg transition">✅ Request Board Review & Log Approval</button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (cmd === '/decision-queue') {
+        stream.innerHTML += `
+          <div class="flex items-start space-x-3 text-sm">
+            <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+            <div class="flex-1 bg-[#222529] p-4 rounded-xl border border-gray-700">
+              <div class="font-bold text-white text-xs mb-2">📋 ImpactPulse Pending Decisions Queue</div>
+              <div class="text-xs text-gray-300 space-y-1">
+                <div>1. 🔴 <span class="font-semibold">[High Priority]</span> Escalate Salesforce Career Foundations mentor shortage.</div>
+                <div>2. 🟡 <span class="font-semibold">[Normal Priority]</span> Approve Q1 2025 Executive Governance & Impact Brief.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (cmd === '/impact-help') {
+        stream.innerHTML += `
+          <div class="flex items-start space-x-3 text-sm">
+            <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+            <div class="flex-1 bg-[#222529] p-4 rounded-xl border border-gray-700 text-xs">
+              <div class="font-bold text-white mb-2">🛡️ ImpactPulse: Executive Watchtower Command Guide</div>
+              <div class="text-gray-400 space-y-1">
+                <div>• <code class="text-indigo-300">/project-risk</code> — Surface prioritized risk alert with 1-click escalation</div>
+                <div>• <code class="text-indigo-300">/board-brief</code> — Generate Q1 Executive Governance Brief</div>
+                <div>• <code class="text-indigo-300">/decision-queue</code> — List all pending executive approvals</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function approveEscalation() {
+      const riskCard = document.getElementById('risk-card');
+      const time = new Date().toLocaleTimeString();
+      logTelemetry(`⚡ <span class="text-emerald-400">action_escalate_risk</span> triggered by Executive Approver`);
+      logTelemetry(`📩 Dispatched Slack DM to Sam (Executive Director) [U0C06KZRT6V]`);
+      logTelemetry(`📩 Dispatched Slack DM to Anu (Director Coordinator) [U0C0Z3RAKQ8]`);
+      logTelemetry(`☁️ Created Salesforce Task ID: <span class="text-blue-400">mock-task-1789226702133</span> (Priority: High)`);
+      logTelemetry(`🔒 Inserted immutable audit record into Supabase (Event: RISK_ESCALATION_APPROVED)`);
+
+      riskCard.innerHTML = `
+        <div class="w-9 h-9 rounded bg-emerald-600 flex items-center justify-center font-bold text-white shrink-0">✓</div>
+        <div class="flex-1 bg-[#222529] p-4 rounded-xl border-l-4 border-l-emerald-500 border-gray-700 shadow-sm">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="font-bold text-white">ImpactPulse Bot</span>
+            <span class="text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">APP</span>
+            <span class="text-xs text-gray-400">${time}</span>
+          </div>
+          <div class="text-base font-bold text-emerald-400 mb-2">✅ Risk Escalation Successfully Executed & Logged</div>
+          <div class="text-xs text-gray-200 mb-3 space-y-1.5">
+            <div><strong>Approved by:</strong> @Authorized Executive</div>
+            <div><strong>Timestamp:</strong> ${time}</div>
+            <div><strong>ImpactPulse ID:</strong> <code class="bg-gray-800 px-1 py-0.5 rounded text-indigo-300">ESC-2025-SF-01</code></div>
+          </div>
+
+          <div class="bg-[#1a1d21] p-3 rounded-lg border border-gray-800 text-xs text-gray-300 mb-3 space-y-2">
+            <div>📋 <strong>Created High-Priority Salesforce Task:</strong> Assigned to <em>Sam (Executive Director)</em> — "Urgent: Reallocate 3 mentors for Salesforce Career Foundations cohort"</div>
+            <div>📨 <strong>Dispatched Coordination Notice:</strong> Sent to <em>Anu (Director Coordinator)</em> for mentor scheduling</div>
+            <div>🔒 <strong>Audit Trail:</strong> Escalation logged in Supabase & Salesforce</div>
+          </div>
+
+          <div class="text-[11px] text-gray-400 border-t border-gray-800 pt-2">
+            🔒 Responsible AI Gate: Action executed only following authorized human verification.
+          </div>
+        </div>
+      `;
+    }
+
+    function resetDemo() {
+      document.getElementById('chat-stream').innerHTML = `
+        <div class="flex items-start space-x-3 text-sm">
+          <div class="w-9 h-9 rounded bg-indigo-500 flex items-center justify-center font-bold text-white shrink-0">IP</div>
+          <div class="flex-1 bg-[#222529] p-4 rounded-xl border border-gray-700 shadow-sm">
+            <div class="text-gray-300 text-xs">Chat reset. Click any command above to test.</div>
+          </div>
+        </div>
+      `;
+      logTelemetry('Chat session reset.');
+    }
+  </script>
+</body>
+</html>

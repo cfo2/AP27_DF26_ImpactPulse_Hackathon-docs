@@ -1,0 +1,17 @@
+{
+  "name": "impactpulse-slack-bolt-app",
+  "version": "1.0.0",
+  "description": "Standalone Slack Bolt.js server for ImpactPulse",
+  "main": "server.ts",
+  "scripts": {
+    "start": "tsx server.ts"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.21.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

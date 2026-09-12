@@ -1,0 +1,46 @@
+display_information:
+  name: ImpactPulse
+  description: Executive command center and risk escalation bot for workforce development nonprofits
+  background_color: "#1e293b"
+features:
+  bot_user:
+    display_name: ImpactPulse
+    always_online: true
+  slash_commands:
+    - command: /project-risk
+      url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/commands
+      description: Surface prioritized program risk alert with 1-click escalation button
+      should_escape: false
+    - command: /escalate-risk
+      url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/commands
+      description: Trigger governed risk escalation workflow and generate Salesforce Task
+      should_escape: false
+    - command: /board-brief
+      url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/commands
+      description: Generate Q1 2025 Executive Governance & Impact Brief draft for review
+      should_escape: false
+    - command: /decision-queue
+      url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/commands
+      description: List all governance actions currently pending executive sign-off
+      should_escape: false
+    - command: /impact-help
+      url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/commands
+      description: Display command guide and quick action menu for ImpactPulse Watchtower
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - commands
+      - im:write
+      - im:history
+      - im:read
+      - users:read
+      - app_mentions:read
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://ap-27-df-26-impact-pulse-hack02.vercel.app/api/slack/interactions
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
